@@ -46,7 +46,30 @@
                 android:layout_height="wrap_content"
                 android:focusable="true"
                 android:orientation="vertical">
+                <TextView
+                    android:id="@+id/name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.Cupcake.TextView.OrderSummary"
+                    android:textAllCaps="true"
+                    android:textStyle="normal"
+                    android:text="@string/ordered_by"
+                    />
+                <TextView
+                    android:id="@+id/ordered_by_name"
+                    android:layout_width="wrap_content"
+                    android:text="@{viewModel.name}"
+                    tools:text="Aaron"
+                    style="@style/Widget.Cupcake.TextView.OrderSummary"
+                    android:layout_height="wrap_content"/>
 
+                <View
+                    android:id="@+id/divider4"
+                    style="@style/Widget.Cupcake.Divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/side_margin"
+                    android:layout_marginBottom="@dimen/side_margin" />
                 <TextView
                     android:id="@+id/quantity_label"
                     style="@style/Widget.Cupcake.TextView.OrderSummary"

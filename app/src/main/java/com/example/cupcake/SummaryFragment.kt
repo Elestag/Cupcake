@@ -67,7 +67,8 @@ class SummaryFragment : Fragment() {
             resources.getQuantityString(R.plurals.cupcakes, numberOfCupcakes, numberOfCupcakes),
             sharedViewModel.flavor.value.toString(),
             sharedViewModel.date.value.toString(),
-            sharedViewModel.price.value.toString()
+            sharedViewModel.price.value.toString(),
+            sharedViewModel.name.value.toString()
         )
         val intent = Intent(Intent.ACTION_SEND)
             .setType("text/plain")

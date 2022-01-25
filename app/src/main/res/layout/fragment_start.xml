@@ -20,7 +20,9 @@
     tools:context=".StartFragment">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.cupcake.model.OrderViewModel" />
         <variable
             name="startFragment"
             type="com.example.cupcake.StartFragment" />
@@ -83,6 +85,23 @@
                 android:minWidth="@dimen/order_cupcake_button_width"
                 android:onClick="@{()-> startFragment.orderCupcake(12)}"
                 android:text="@string/twelve_cupcakes" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:minWidth="@dimen/order_cupcake_button_width"
+                android:layout_marginTop="@dimen/margin_between_elements"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/text_field_input"
+                    android:layout_width="match_parent"
+                    android:inputType="text"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </ScrollView>
 </layout>

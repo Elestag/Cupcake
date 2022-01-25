@@ -20,6 +20,8 @@ class OrderViewModel : ViewModel() {
 
     private val _date = MutableLiveData<String>()
     val date: LiveData<String> = _date
+    private val _name = MutableLiveData<String>()
+    val name: LiveData<String> = _name
 
     private val _price = MutableLiveData<Double>()
     val price: LiveData<String> = Transformations.map(_price) {
@@ -44,6 +46,10 @@ class OrderViewModel : ViewModel() {
     fun setDate(pickupDate: String) {
         _date.value = pickupDate
         updatePrice()
+    }
+
+    fun setName(enteredName: String) {
+        _name.value = enteredName
     }
 
     fun hasNoFlavorSet(): Boolean {
