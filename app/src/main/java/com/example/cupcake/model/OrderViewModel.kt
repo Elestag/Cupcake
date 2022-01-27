@@ -23,12 +23,18 @@ class OrderViewModel : ViewModel() {
     private val _name = MutableLiveData<String>()
     val name: LiveData<String> = _name
 
+    private val _isSpecial = MutableLiveData<Boolean>()
+    val isSpecial: LiveData<Boolean> = _isSpecial
+
     private val _price = MutableLiveData<Double>()
     val price: LiveData<String> = Transformations.map(_price) {
         NumberFormat.getCurrencyInstance().format(it)
     }
+    private val _flavorSummary = MutableLiveData<String>()
+    val flavorSummary: LiveData<String> = _flavorSummary
 
     val dateOptions = getPickupOptions()
+    val flavorOptions = mutableSetOf<String>()
 
     init {
         resetOrder()
@@ -40,13 +46,30 @@ class OrderViewModel : ViewModel() {
     }
 
     fun setFlavor(desiredFlavor: String) {
+        if (desiredFlavor == "Special") {
+            setIsSpecial(false)
+        }
         _flavor.value = desiredFlavor
+    }
+
+    fun setFlavorOptions(flavorOptions1: String) {
+        flavorOptions.add(flavorOptions1)
+    }
+
+    fun removeFlavorOptions(flavorOptions2: String) {
+        flavorOptions.remove(flavorOptions2)
+    }
+
+    fun setIsSpecial(isSp: Boolean) {
+        _isSpecial.value = isSp
     }
 
     fun setDate(pickupDate: String) {
         _date.value = pickupDate
         updatePrice()
+
     }
+
 
     fun setName(enteredName: String) {
         _name.value = enteredName
@@ -67,6 +90,7 @@ class OrderViewModel : ViewModel() {
         return options
     }
 
+
     private fun updatePrice() {
         var calculatedPrice = (quantity.value ?: 0) * PRICE_PER_CUPCAKE
         if (dateOptions[0] == _date.value) {
@@ -78,7 +102,10 @@ class OrderViewModel : ViewModel() {
     fun resetOrder() {
         _quantity.value = 0
         _flavor.value = ""
+        _flavorSummary.value = ""
         _date.value = dateOptions[1]
         _price.value = 0.0
+        _isSpecial.value = true
+        flavorOptions.clear()
     }
 }

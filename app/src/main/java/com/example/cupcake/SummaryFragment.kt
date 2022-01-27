@@ -17,6 +17,7 @@ package com.example.cupcake
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +42,7 @@ class SummaryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val fragmentBinding = FragmentSummaryBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
@@ -55,6 +56,7 @@ class SummaryFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             summaryFragment = this@SummaryFragment
         }
+        Log.d("Flavor", "flavorOptions is: ${sharedViewModel.flavorSummary.value}")
     }
 
     /**
@@ -76,6 +78,14 @@ class SummaryFragment : Fragment() {
             .putExtra(Intent.EXTRA_TEXT, orderSummary)
         if (activity?.packageManager?.resolveActivity(intent, 0) != null) {
             startActivity(intent)
+        }
+    }
+
+    fun summaryOrderFlavor(): String {
+        return if (sharedViewModel.quantity.value!! > 1) {
+            sharedViewModel.flavorOptions.sorted().toString().trim('[',']')
+        } else {
+            sharedViewModel.flavor.value.toString()
         }
     }
 
